@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        applicationId "com.example.unsplashimageviewer"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String","UNSPLASH_ACCESS_KEY",unsplash_access_key)
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    kotlinOptions{
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompat"
+    implementation "androidx.core:core-ktx:$rootProject.coreKtx"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
+    implementation "com.google.android.material:material:$rootProject.materialDesign"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retroConverter"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    //viewmodel and livedata
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "android.arch.lifecycle:common-java8:2.2.0"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroid"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
+    implementation "com.android.support:design:$rootProject.design"
+    implementation "com.android.support:recyclerview-v7:$rootProject.recyclerView"
+    //room
+    implementation "androidx.room:room-runtime:$rootProject.room"
+    implementation "androidx.room:room-ktx:2.2.6"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //Moshi
+    implementation 'com.squareup.moshi:moshi:1.9.3'
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.3'
+    kapt "androidx.room:room-compiler:$rootProject.room"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.persistenceRoom"
+    implementation "androidx.room:room-rxjava2:$rootProject.room"
+    implementation "com.google.code.gson:gson:$rootProject.gson"
+    implementation "androidx.room:room-ktx:$rootProject.room"
+    implementation "com.phelat:navigationresult:1.0.0"
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.navComp"
+    implementation "android.arch.navigation:navigation-ui:$rootProject.navComp"
+    implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.navComp"
+    //koin
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
+    //Glide
+    implementation "com.github.bumptech.glide:glide:4.11.0"
+    kapt "com.github.bumptech.glide:compiler:4.11.0"
+    //photoview
+    implementation "com.github.chrisbanes:PhotoView:2.3.0"
+    //timber
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:4.1.2"
+    testImplementation "androidx.test:core:1.3.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8"
+    testImplementation "org.robolectric:robolectric:4.3.1"
+
+    testImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.mockwebserverVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
+
+
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.mockwebserverVersion"
+    androidTestImplementation "androidx.test.ext:truth:$rootProject.testRuleUi"
+    androidTestImplementation "androidx.test:runner:$rootProject.testRuleUi"
+    androidTestImplementation "androidx.test:rules:$rootProject.testRuleUi"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.jUnitExt"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:3.0.2') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    }
+}
